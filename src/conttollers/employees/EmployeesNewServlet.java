@@ -29,9 +29,14 @@ public class EmployeesNewServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // CSRF対策（セキュリティ）
         request.setAttribute("_token", request.getSession().getId());
+
+        // インスタンス化（おまじない）
         request.setAttribute("employee", new Employee());
 
+        // newのJSPへ送る
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/new.jsp");
         rd.forward(request, response);
     }

@@ -8,20 +8,25 @@ import javax.persistence.EntityManager;
 import models.Employee;
 import utils.DBUtil;
 
+
+// 従業員登録時ののバリデーター（入力チェック）
 public class EmployeeValidator {
     public static List<String> validate(Employee e, Boolean codeDuplicateCheckFlag, Boolean passwordCheckFlag) {
         List<String> errors = new ArrayList<String>();
 
+        // 社員番号未入力チェック
         String code_error = validateCode(e.getCode(), codeDuplicateCheckFlag);
         if(!code_error.equals("")) {
             errors.add(code_error);
         }
 
+        // 氏名未入力チェック
         String name_error = validateName(e.getName());
         if(!name_error.equals("")) {
             errors.add(name_error);
         }
 
+        // パスワード未入力チェック
         String password_error = validatePassword(e.getPassword(), passwordCheckFlag);
         if(!password_error.equals("")) {
             errors.add(password_error);

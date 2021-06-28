@@ -28,10 +28,6 @@
                 </c:if>
             </div>
 
-
-
-
-
             <div id="content">
                 ${param.content}
             </div>

@@ -7,7 +7,7 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>従業員　一覧</h2>
+        <h2>従業員 一覧</h2>
         <table id="employee_list">
             <tbody>
                 <tr>
@@ -34,6 +34,7 @@
             </tbody>
         </table>
 
+        <%-- ページネーション（15件ずつ） --%>
         <div id="pagination">
             （全 ${employees_count} 件）<br />
             <c:forEach var="i" begin="1" end="${((employees_count - 1) / 15) + 1}" step="1">

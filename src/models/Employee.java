@@ -13,23 +13,29 @@ import javax.persistence.Table;
 
 @Table(name = "employees")
 @NamedQueries({
+
+    // 全従業員を抽出
     @NamedQuery(
         name = "getAllEmployees",
         query = "SELECT e FROM Employee AS e ORDER BY e.id DESC"
     ),
+    // 従業員数をカウント
     @NamedQuery(
         name = "getEmployeesCount",
         query = "SELECT COUNT(e) FROM Employee AS e"
     ),
+    // 指定された社員番号がすでにデータベースに存在しているかを調べる
     @NamedQuery(
         name = "checkRegisteredCode",
         query = "SELECT COUNT(e) FROM Employee AS e WHERE e.code = :code"
     ),
+    // 従業員がログインするときに社員番号とパスワードが正しいかをチェックする
     @NamedQuery(
         name = "checkLoginCodeAndPassword",
         query = "SELECT e FROM Employee AS e WHERE e.delete_flag = 0 AND e.code = :code AND e.password = :pass"
     )
 })
+
 @Entity
 public class Employee {
     @Id
@@ -37,6 +43,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // unique = true ・・・ 一意制約（すでに存在している社員番号は登録できない旨をデータベースに教えてあげるための設定）
     @Column(name = "code", nullable = false, unique = true)
     private String code;
 
